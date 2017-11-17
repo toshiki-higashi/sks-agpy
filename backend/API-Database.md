@@ -18,14 +18,24 @@
         * 資産情報を取得
         * Request
         * Response
-    * PUT
-        * ステータス更新
-            * 自分の所有物ではないので、貸出状態の更新のみ?
+    * POST
+        * 資産を新たに追加
+            * 自動採番なら{id}はいくつになる?
         * Request
         * Response
-* /users/{id}/
+    * PUT
+        * ステータス更新
+            * 自分の所有物なので、詳細を変更可能にする?
+        * Request
+        * Response
+    * DELETE
+        * 資産を削除
+            * かならずしも本当にDeleteItemしなくてもよい?
+        * Request
+        * Response
+* /users/
     * GET
-        * ユーザ一覧を取得
+        * 資産一覧を取得
         * Request
         * Response
 * /users/{id}/
@@ -41,38 +51,17 @@
     * DELETE
         * ユーザの削除
             * かならずしも本当にDeleteItemしなくてもよい?
-        * Request
-        * Response
-* /users/{id}/items/
-    * GET
-        * ユーザの所有する資産の一覧を取得
-        * Request
-        * Response
-* /users/{id}/items/{id}/
-    * GET
-        * 所有する資産の詳細を取得
-        * Request
-        * Response
-    * POST
-        * 資産を新たに追加
-            * 自動採番なら{id}はいくつになる?
-            * ユーザにぶら下げてやるか、/items/{id}/でやるか
-            * 所有者が退会した場合、その資産はどうするか
+            * ある資産の所有者が退会した場合、その資産はどうするか
                 * 削除
                 * 所有者をだれかしていさせて引き継がせる
         * Request
         * Response
-    * PUT
-        * ステータス更新
-            * 自分の所有物なので、詳細を変更可能にする?
-        * Request
-        * Response
-    * DELETE
-        * 資産を削除
-            * かならずしも本当にDeleteItemしなくてもよい?
-            * ユーザにぶら下げてやるか、/items/{id}/でやるか
-        * Request
-        * Response
+            ```
+            {
+                "target":<id>,
+                "status":<status>
+            }
+            ```
 
 ## DynamoDB
 
