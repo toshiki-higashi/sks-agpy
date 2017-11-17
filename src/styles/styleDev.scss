@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/*デバッグ・勉強用に要素に色をつけるためのCSS*/
+
+/*div要素に背景色を塗る*/
+#wrapper { background-color: #dddddd; }
+#header { background-color: #ddddff; }
+#title { background-color: #ddffdd; }
+#personalarea { background-color: #ffdddd; }
+#contents { background-color: #ffffdd; }
+#contents #input_area {background-color: #ddddff; }
+#contents #table01 { background-color: #ffdddd; }
+#contents #table02 { background-color: #ddffdd; }
+
+/*Bootstrapのrowを点線で括る*/
+.row { border: dashed 1px #888888; }

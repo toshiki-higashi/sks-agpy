@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources: 
+  myDynamoDBTable: 
+    Type: "AWS::DynamoDB::Table"
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "Id"
+          AttributeType: "S"
+        - 
+          AttributeName: "Name"
+          AttributeType: "S"
+        - 
+          AttributeName: "Owner"
+          AttributeType: "N"
+        - 
+          AttributeName: "Category"
+          AttributeType: "N"
+        - 
+          AttributeName: "Holder"
+          AttributeType: "N"
+        - 
+          AttributeName: "CheckoutDate"
+          AttributeType: "N"
+        - 
+          AttributeName: "DueDate"
+          AttributeType: "N"
+      KeySchema: 
+        - 
+          AttributeName: "Id"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
+      TableName: "AgepoyoAssets"
+      LocalSecondaryIndexes: 
+        - 
+          IndexName: "myLSI"
+          KeySchema: 
+            - 
+              AttributeName: "Album"
+              KeyType: "HASH"
+            - 
+              AttributeName: "Sales"
+              KeyType: "RANGE"
+          Projection: 
+            NonKeyAttributes: 
+              - "Artist"
+              - "NumberOfSongs"
+            ProjectionType: "INCLUDE"
