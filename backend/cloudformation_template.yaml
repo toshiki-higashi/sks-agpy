@@ -1,8 +1,9 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Resources: 
-  myDynamoDBTable: 
+  AssetsTable: 
     Type: "AWS::DynamoDB::Table"
     Properties: 
+      TableName: "AgepoyoAssets"
       AttributeDefinitions: 
         - 
           AttributeName: "Id"
@@ -12,19 +13,19 @@ Resources:
           AttributeType: "S"
         - 
           AttributeName: "Owner"
-          AttributeType: "N"
+          AttributeType: "S"
         - 
           AttributeName: "Category"
-          AttributeType: "N"
+          AttributeType: "S"
         - 
           AttributeName: "Holder"
-          AttributeType: "N"
+          AttributeType: "S"
         - 
           AttributeName: "CheckoutDate"
-          AttributeType: "N"
+          AttributeType: "S"
         - 
           AttributeName: "DueDate"
-          AttributeType: "N"
+          AttributeType: "S"
       KeySchema: 
         - 
           AttributeName: "Id"
@@ -32,7 +33,39 @@ Resources:
       ProvisionedThroughput: 
         ReadCapacityUnits: "5"
         WriteCapacityUnits: "5"
-      TableName: "AgepoyoAssets"
+      LocalSecondaryIndexes: 
+        - 
+          IndexName: "myLSI"
+          KeySchema: 
+            - 
+              AttributeName: "Album"
+              KeyType: "HASH"
+            - 
+              AttributeName: "Sales"
+              KeyType: "RANGE"
+          Projection: 
+            NonKeyAttributes: 
+              - "Artist"
+              - "NumberOfSongs"
+            ProjectionType: "INCLUDE"
+  UsersTable: 
+    Type: "AWS::DynamoDB::Table"
+    Properties: 
+      TableName: "AgepoyoUsers"
+      AttributeDefinitions: 
+        - 
+          AttributeName: "Id"
+          AttributeType: "S"
+        - 
+          AttributeName: "Name"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "Id"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
       LocalSecondaryIndexes: 
         - 
           IndexName: "myLSI"

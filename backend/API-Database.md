@@ -11,41 +11,95 @@
 * /items/
     * GET
         * 資産一覧を取得
+        * Request: Query stringなしの普通のURL
+        * Response
+            ```
+            {
+                [
+                    {
+                        "id": {},
+                        "name": {},
+                        "owner": {},
+                        "category": {},
+                        "holder": {},
+                        "checkout date": {},
+                        "due date":{}
+                    },
+                    {
+                        "id": {},
+                        "name": {},
+                        "owner": {},
+                        "category": {},
+                        "holder": {},
+                        "checkout date": {},
+                        "due date":{}
+                    }
+                ]
+            }
+            ```
+    * POST
+        * 資産を新たに追加
+            * 自動採番(UUID)する
         * Request
+            ```
+            {
+                "name": {},
+                "owner": {},
+                "category": {},
+            }
+            ```
         * Response
 * /items/{id}/
     * GET
-        * 資産情報を取得
-        * Request
+        * 資産情報を1件取得
+        * Request: Query stringなしの普通のURL
         * Response
-    * POST
-        * 資産を新たに追加
-            * 自動採番なら{id}はいくつになる?
-        * Request
-        * Response
+            ```
+            {
+                "id": {},
+                "name": {},
+                "owner": {},
+                "category": {},
+                "holder": {},
+                "checkout date": {},
+                "due date":{}
+            }
+            ```
     * PUT
         * ステータス更新
-            * 自分の所有物なので、詳細を変更可能にする?
         * Request
+            ```
+            {
+                "name": {},
+                "owner": {},
+                "category": {},
+                "holder": {},
+                "checkout date": {},
+                "due date":{}
+            }
+            ```
         * Response
     * DELETE
         * 資産を削除
-            * かならずしも本当にDeleteItemしなくてもよい?
-        * Request
+        * Request: Query stringなしの普通のURL
         * Response
+            * 成功時
+                ```
+                204
+                ```
 * /users/
     * GET
-        * 資産一覧を取得
+        * ユーザ一覧を取得
         * Request
         * Response
 * /users/{id}/
     * GET
         * ユーザ情報の取得
-        * Request
+        * Request: Query stringなしの普通のURL
         * Response
     * POST
         * ユーザの追加
-            * 自動採番なら{id}はいくつになる?
+            * 自動採番(UUID)する
         * Request
         * Response
     * DELETE
@@ -53,8 +107,8 @@
             * かならずしも本当にDeleteItemしなくてもよい?
             * ある資産の所有者が退会した場合、その資産はどうするか
                 * 削除
-                * 所有者をだれかしていさせて引き継がせる
-        * Request
+                * 所有者を指定して引き継がせる
+        * Request: Query stringなしの普通のURL
         * Response
             ```
             {
