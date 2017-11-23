@@ -33,21 +33,6 @@ Resources:
       ProvisionedThroughput: 
         ReadCapacityUnits: "5"
         WriteCapacityUnits: "5"
-      LocalSecondaryIndexes: 
-        - 
-          IndexName: "myLSI"
-          KeySchema: 
-            - 
-              AttributeName: "Album"
-              KeyType: "HASH"
-            - 
-              AttributeName: "Sales"
-              KeyType: "RANGE"
-          Projection: 
-            NonKeyAttributes: 
-              - "Artist"
-              - "NumberOfSongs"
-            ProjectionType: "INCLUDE"
   UsersTable: 
     Type: "AWS::DynamoDB::Table"
     Properties: 
@@ -59,6 +44,9 @@ Resources:
         - 
           AttributeName: "Name"
           AttributeType: "S"
+        - 
+          AttributeName: "Checkout"
+          AttributeType: "L"
       KeySchema: 
         - 
           AttributeName: "Id"
@@ -66,18 +54,3 @@ Resources:
       ProvisionedThroughput: 
         ReadCapacityUnits: "5"
         WriteCapacityUnits: "5"
-      LocalSecondaryIndexes: 
-        - 
-          IndexName: "myLSI"
-          KeySchema: 
-            - 
-              AttributeName: "Album"
-              KeyType: "HASH"
-            - 
-              AttributeName: "Sales"
-              KeyType: "RANGE"
-          Projection: 
-            NonKeyAttributes: 
-              - "Artist"
-              - "NumberOfSongs"
-            ProjectionType: "INCLUDE"
