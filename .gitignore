@@ -57,3 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# swap files
+*.swp

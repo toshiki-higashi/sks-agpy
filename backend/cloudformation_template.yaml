@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources: 
+  AssetsTable: 
+    Type: "AWS::DynamoDB::Table"
+    Properties: 
+      TableName: "AgepoyoAssets"
+      AttributeDefinitions: 
+        - 
+          AttributeName: "Id"
+          AttributeType: "S"
+        - 
+          AttributeName: "Name"
+          AttributeType: "S"
+        - 
+          AttributeName: "Owner"
+          AttributeType: "S"
+        - 
+          AttributeName: "Category"
+          AttributeType: "S"
+        - 
+          AttributeName: "Holder"
+          AttributeType: "S"
+        - 
+          AttributeName: "CheckoutDate"
+          AttributeType: "S"
+        - 
+          AttributeName: "DueDate"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "Id"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
+  UsersTable: 
+    Type: "AWS::DynamoDB::Table"
+    Properties: 
+      TableName: "AgepoyoUsers"
+      AttributeDefinitions: 
+        - 
+          AttributeName: "Id"
+          AttributeType: "S"
+        - 
+          AttributeName: "Name"
+          AttributeType: "S"
+        - 
+          AttributeName: "Checkout"
+          AttributeType: "L"
+      KeySchema: 
+        - 
+          AttributeName: "Id"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"

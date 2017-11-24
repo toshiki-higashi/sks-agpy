@@ -1,0 +1,27 @@
+{
+  "name": "sks-asset",
+  "private": true,
+  "scripts": {
+    "dev": "webpack-dev-server --open",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.3.0",
+    "eslint-plugin-vue": "^3.8.0",
+    "node-sass": "^4.5.3",
+    "pug": "^2.0.0-rc.3",
+    "pug-html-loader": "^1.1.5",
+    "sass-loader": "^6.0.6",
+    "vue": "^2.4.1",
+    "vue-loader": "^13.5.0",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.4.1",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
+  }
+}
