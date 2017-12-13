@@ -63,3 +63,6 @@ Thumbs.db
 
 # swap files
 *.swp
+
+# Local development environment
+shared-local-instance.db
