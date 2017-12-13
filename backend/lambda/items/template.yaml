@@ -19,7 +19,22 @@ Resources:
           Properties:
             Path: /items
             Method: post
-        Item:
+        GetItem:
+          Type: Api
+          Properties:
+            Path: /items/{item}
+            Method: get
+        UpdateItem:
+          Type: Api
+          Properties:
+            Path: /items/{item}
+            Method: put
+        DeleteItem:
+          Type: Api
+          Properties:
+            Path: /items/{item}
+            Method: delete
+        Invalid:
           Type: Api
           Properties:
             Path: /items/{item}
