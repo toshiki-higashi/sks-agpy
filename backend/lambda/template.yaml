@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AGPY project
+
+Resources:
+  Items:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: items.handler
+      Runtime: nodejs6.10
+      Events:
+        ListItems:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: get
+        CreateItem:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: post
+        Item:
+          Type: Api
+          Properties:
+            Path: /items/{item}
+            Method: any
+  Users:
+    Type: AWS::Serverless::Function
+    Handler: users.handler
+    Runtime: nodejs6.10
+    Events:
+        ListUsers:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: get
+        CreateUser:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: post
+        User:
+          Type: Api
+          Properties:
+            Path: /users/{user}
+            Method: any
