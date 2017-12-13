@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Hackers and Painters",
+      "owner": "田中太郎",
+      "holder": null,
+      "checkout date": null,
+      "due date": null
+    },
+    {
+      "id": 2,
+      "name": "The Art of Readable Code",
+      "owner": "山田花子",
+      "holder": "田中太郎",
+      "checkout date": "2017-12-1",
+      "due date": "2017-12-15"
+    },
+    {
+      "id": 3,
+      "name": "Software Design 2017年12月号",
+      "owner": "田中太郎",
+      "holder": "John Smith",
+      "checkout date": "2017-11-01",
+      "due date": "2017-11-15"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "田中太郎",
+      "checkout":[
+        {
+          "id": 2,
+          "name": "The Art of Readable Code",
+          "checkout date": "2017-12-1",
+          "due date": "2017-12-15"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "山田花子",
+      "checkout": null
+    },
+    {
+      "id": 3,
+      "name": "John Smith",
+      "checkout":[
+        {
+          "id": 3,
+          "name": "Software Design 2017年12月号",
+          "checkout date": "2017-11-01",
+          "due date": "2017-11-15"
+        }
+      ]
+    }
+  ]
+}
