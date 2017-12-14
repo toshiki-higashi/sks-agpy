@@ -1,5 +1,5 @@
 {
-  "name": "sks-asset",
+  "name": "sks-agpy",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --open",
