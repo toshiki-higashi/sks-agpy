@@ -7,7 +7,8 @@ Vue.use(VueRouter);
 // components読み込み
 // ページ遷移で書き換えられるコンポーネントは全てここで読み込む
 import App from './App.vue';
-import ShowItem from './components/ShowItem.vue';
+import ShowItems from './components/ShowItems.vue';
+import ShowItemDetails from './components/ShowItemDetails.vue';
 import AddItem from './components/AddItem.vue';
 import UpdateItem from './components/UpdateItem.vue';
 import DeleteItem from './components/DeleteItem.vue';
@@ -19,10 +20,11 @@ const routes = [
     component: App,
     props: true,
     children: [
-      { path: '', components: { ShowItem } },
-      { path: 'add', components: { AddItem } },
-      { path: 'update', components: { UpdateItem } },
-      { path: 'delete', components: { DeleteItem } }
+      { path: 'item', components: { ShowItems } },
+      { path: 'item/details/:id', components: { ShowItemDetails }, props: true },
+      { path: 'item/add', components: { AddItem } },
+      { path: 'item/update', components: { UpdateItem } },
+      { path: 'item/delete', components: { DeleteItem } }
     ]
   }
 ]
