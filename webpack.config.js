@@ -2,9 +2,9 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './frontend/src/main.js',
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'frontend/dist'),
     filename: 'build.js'
   },
   module: {
@@ -23,6 +23,10 @@ module.exports = {
         loader: 'babel-loader', // babel-loaderを適用
         exclude: /node_modules/ // ただし/node_modules/は除外
       },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader','css-loader']
+      }
     ]
   },
   // vue-routerを使用する場合は必要、それ以外の場合は不要
@@ -31,7 +35,7 @@ module.exports = {
   },
   // webpack-dev-serverのための設定
   devServer: {
-    contentBase: 'dist', // rootディレクトリ
+    contentBase: 'frontend/dist', // rootディレクトリ
     historyApiFallback: true, // trueだとSPAでブラウザの戻るボタンに対応。すごい。
     noInfo: true // なに
   },

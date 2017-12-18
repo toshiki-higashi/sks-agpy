@@ -1,5 +1,5 @@
 {
-  "name": "sks-asset",
+  "name": "sks-agpy",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --open",
@@ -11,6 +11,7 @@
     "babel-preset-env": "^1.6.0",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.7",
+    "style-loader": "^0.19.1",
     "eslint": "^4.3.0",
     "eslint-plugin-vue": "^3.8.0",
     "node-sass": "^4.5.3",
