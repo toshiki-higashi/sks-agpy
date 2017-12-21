@@ -3,28 +3,22 @@ var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
 
 AWS.config.update({
-  // Does the region specified here needs to be consistent
-  // with the downloaded version of DynamoDB Local?
+  // ここで指定するリージョンはDynamoDBLocalとあっている必要あり？(未検証)
   region: "ap-northeast-1",
-
-  // Endpoint should be an alias for loopback interface
-  // Change to https://dynamodb.aws-region.amazonaws.com
-  // (replace aws-region with the region you use)
+  // DynamoDBLocal自体はlocalhostで動くが、SAM Localと一緒に使うなら
+  // ループバックのエイリアスが必要
   endpoint: "http://192.16.123.1:8000"
 });
 var db = new AWS.DynamoDB();
 
 exports.handler = (event, context, callback)=> {
 
-  // common parameters to call DynamoDB API
+  // DynamoDBのAPIに渡す共通のパラメータ
   var params = {
     TableName: "agpy-items"
   };
 
-  // Get path parameter, set false if not given
-  let id = event.pathParameters?event.pathParameters.item:false;
-
-  // Set validation function and database operation
+  // これらの変数にHTTPメソッドに応じた値・処理を代入する
   var responseBody = null;
   var validator = null;
   var operation = null;
@@ -32,13 +26,13 @@ exports.handler = (event, context, callback)=> {
   switch(event.httpMethod){
     case "GET":
 
-      if(id){
+      if(event.pathParameters){
 
         validator = function(){};
 
         operation = function(){
           // Get an item with the key given
-          params.Key = {"id":{"S":id}};
+          params.Key = {"id":{"S":event.pathParameters.item}};
           db.getItem(params, function(err,data){
             if(err){
 
@@ -57,8 +51,8 @@ exports.handler = (event, context, callback)=> {
 
         validator = function(){};
 
+        // 全てのitemを取得する
         operation = function(){
-          // Get all items in agpy-item
           db.scan(params, function(err,data){
             if(err){
 
@@ -79,8 +73,8 @@ exports.handler = (event, context, callback)=> {
     case "POST":
       validator = function(){};
 
-      // Create a new item in apgy-items
-      // What if a generated uuid collide with any of existing uuids?
+      // 新たにitemを追加する 
+      // UUID衝突時は？
       operation = function(){
         params.Item = {
           "id":{"S":uuid.v4()},
@@ -102,10 +96,9 @@ exports.handler = (event, context, callback)=> {
       break;  
 
     case "PUT":
-      // What attributes should be required? Only changed or all of them?
       validator = function(){};
 
-      // Update an item with the given id
+      // 変更箇所に関わらず全ての属性を更新する
       operation = function(){
       };
       break;  
@@ -113,8 +106,8 @@ exports.handler = (event, context, callback)=> {
     case "DELETE":
       validator = function(){};
 
+      // 削除した結果は(今のところ)返却しなくてもいい
       operation = function(){
-        // Delete an item with the given id
       };
       break;
 
@@ -123,7 +116,7 @@ exports.handler = (event, context, callback)=> {
       return;
   }; 
 
-  // Apply validation and execute CRUD
+  // 入力チェック、DB処理を実行する
   validator();
   operation();
 
