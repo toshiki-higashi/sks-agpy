@@ -40,8 +40,16 @@ exports.handler = (event, context, callback)=> {
           // Get an item with the key given
           params.Key = {"id":{"S":id}};
           db.getItem(params, function(err,data){
-            if(err)console.log(err);
-            else console.log(data);
+            if(err){
+
+              console.log(err);
+
+            }
+            else{ console.log(data);
+
+              callback(null, {statusCode: 200, body: "get id"});
+
+            }
           });
         };
 
@@ -52,10 +60,18 @@ exports.handler = (event, context, callback)=> {
         operation = function(){
           // Get all items in agpy-item
           db.scan(params, function(err,data){
-            if(err)console.log(err);
-            else console.log(data);
+            if(err){
+
+              console.log(err);
+
+            }
+            else{ 
+
+              console.log(data);
+              callback(null, {statusCode: 200, body: responseBody});
+
+            }
           });
-          responseBody = 'list of items...'
         };
       }
       break;
@@ -70,8 +86,17 @@ exports.handler = (event, context, callback)=> {
           "id":{"S":uuid.v4()},
           "name":{"S":"foo"}};
         db.putItem(params,function(err,data){
-          if(err)console.log(err);
-          else console.log(data);
+            if(err){
+
+              console.log(err);
+
+            }
+            else{ 
+
+              console.log(data);
+              callback(null, {statusCode: 200, body: responseBody});
+
+            }
         });
       };
       break;  
