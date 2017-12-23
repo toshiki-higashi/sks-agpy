@@ -27,14 +27,14 @@ const routes = [
       { path: 'item/delete', components: { DeleteItem } }
     ]
   }
-]
+];
 
 // VueRouterインスタンスを作成して定義したroutesを渡す
 const router = new VueRouter({
   routes // `routes: routes` の短縮表記
-})
+});
 
 // Vueインスタンスを作成してrouterをインジェクト？する
 new Vue({
-  router
+  router // `router: router` の短縮表記
 }).$mount('#app')

@@ -53,8 +53,8 @@ export default {
       itemLists: []
     }
   },
-  // 検証環境ではnpmパッケージjson-serverを叩いて、
-  // db.jsonファイルの中身を取り出している
+  // 検証環境ではnpmパッケージjson-serverを叩いて、db.jsonファイルの中身を取り出している
+  // `node .\node_modules\json-server\bin\index.js --watch .\db.json`
   // beforeMountが良いかは検討の余地あり
   // 詳細はVue.js公式ドキュメントのライフサイクルフックを参照
   beforeMount: function () {
