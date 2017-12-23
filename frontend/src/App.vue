@@ -34,13 +34,14 @@ export default {
   },
   data() {
     return {
-      // 表の日本語は、フロント側が明示的に持つ
-      // 表のヘッダー行(項目一覧)
+      // 表のヘッダー行項目一覧
+      // (表の日本語は、フロント側が明示的に持つ)
       listsColumns: {
-        // idはデータとして存在するしAPIの結果には帰ってくるが、表には表示しない
-        // id: 'ID',
+        // id: 'ID', //データとして存在するしAPIの結果には帰ってくるが、表には表示しない
         category: 'カテゴリ',
         name: '名前',
+        location: '建物',
+        place:'場所',
         getDate: '取得日',
         owner: '持ち主',
         borrower: '借りる人',
@@ -53,6 +54,8 @@ export default {
           id: '100123',
           category: '本',
           name: '仕事に必要なことはすべて映画で学べる  映画監督 押井守',
+          location: '本社',
+          place:'8F本棚A-1',
           getDate: '2017/10/01',
           owner: 'A氏',
           borrower: 'B氏',
@@ -63,6 +66,8 @@ export default {
           id: '100288',
           category: '本',
           name: 'Web API: The Good Parts  水野 貴明',
+          location: '本社',
+          place:'8F本棚C-8',
           getDate: '2017/11/10',
           owner: 'C氏',
           borrower: 'D氏',
@@ -73,6 +78,8 @@ export default {
           id: '200288',
           category: 'PC',
           name: 'raspberry pi 3',
+          location: '本社',
+          place:'第1倉庫室',
           getDate: '2017/11/10',
           owner: '第1チーム',
           borrower: 'E氏',
@@ -83,6 +90,8 @@ export default {
           id: '200456',
           category: 'PC',
           name: 'mac mini',
+          location: '大阪オフィス',
+          place:'第1倉庫室',
           getDate: '2017/11/10',
           owner: '第1チーム',
           borrower: '',
@@ -93,6 +102,8 @@ export default {
           id: '300789',
           category: 'その他',
           name: '寝袋',
+          location: '大阪オフィス',
+          place:'第1倉庫室',
           getDate: '2017/11/10',
           owner: '第1チーム',
           borrower: 'imada',
@@ -103,6 +114,8 @@ export default {
           id: '300288',
           category: 'その他',
           name: '掃除機',
+          location: '大阪オフィス',
+          place:'第1倉庫室',
           getDate: '2017/11/10',
           owner: '第1チーム',
           borrower: '',
