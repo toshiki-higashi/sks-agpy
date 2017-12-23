@@ -11,9 +11,9 @@ div#wrapper.container-fluid
       Menu
   div.row
     div#contents.col-12
-      router-view(name='ShowItems',:columns="listsColumns",:lists="lists")
+      router-view(name='ShowItems',:itemListsColumns="itemListsColumns",:itemLists="itemLists")
       //- 下のprops: ['id']で取得したidの情報をちゃんと投げる
-      router-view(name='ShowItemDetails',:columns="listsColumns",:lists="lists",:id="id")
+      router-view(name='ShowItemDetails',:itemListsColumns="itemListsColumns",:itemLists="itemLists",:id="id")
       router-view(name='AddItem')
       router-view(name='UpdateItem')
       router-view(name='DeleteItem')
@@ -36,7 +36,7 @@ export default {
     return {
       // 表のヘッダー行項目一覧
       // (表の日本語は、フロント側が明示的に持つ)
-      listsColumns: {
+      itemListsColumns: {
         // id: 'ID', //データとして存在するしAPIの結果には帰ってくるが、表には表示しない
         category: 'カテゴリ',
         name: '名前',
@@ -49,7 +49,7 @@ export default {
         returnDate: '返す日',
       },
       // 表のデータ※本来はここをAPIで引っ張ってくる
-      lists: [
+      itemLists: [
         {
           id: '100123',
           category: '本',

@@ -2,7 +2,7 @@
 div
   h2 資産一覧
   //- v-bind:」は「:」に、「v-on:」は「@」に省略できる
-  item-table(:columns="columns",:lists="lists")
+  item-table(:itemListsColumns="itemListsColumns",:itemLists="itemLists")
 </template>
 
 <script>
@@ -15,8 +15,8 @@ export default {
     ItemTable
   },
   props: {
-    columns: Array,
-    lists: Array
+    itemListsColumns: Array,
+    itemLists: Array
   },
   // vueによる描画が全て終わった後で実行される。
   // ここではdatatableプラグインをtableに適用している
