@@ -39,7 +39,9 @@ exports.handler = (event, context, callback)=> {
               console.log(err);
               callback(null, {statusCode: 500, body: err});
             }else{ 
-              // すべてstring型とわかっているなら、キー名でループして1行で書けない？
+              // TODO すべてstring型とわかっているなら、キー名でループして1行で書けない？
+              // TODO 所有者/借りている人はDB上でどう持つ
+              // user.id持つならagpy-usersを見に行かないといけない
               responseBody = {
                 id: data.Item.id.S,
                 category: data.Item.category.S,
@@ -74,8 +76,7 @@ exports.handler = (event, context, callback)=> {
               console.log(data);
               data.Items.forEach(function(item){
                 console.log(item);
-                // すべてstring型とわかっているなら、キー名でループして1行で書けない？
-                // idつきで一個取ってきた場合と微妙に違うのが気持ち悪い
+                // TODO idつきで一個取ってきた場合と微妙に違うのが気持ち悪い
                 let element = {
                   id: item.id.S,
                   category: item.category.S,
