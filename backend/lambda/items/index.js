@@ -1,17 +1,22 @@
 'use strict';
-var AWS = require('aws-sdk');
+var aws = require('aws-sdk');
 var uuid = require('node-uuid');
 
-// AWS.config.update({
+// aws.config.update({
 //   // ここで指定するリージョンはDynamoDBLocalとあっている必要あり？(未検証)
 //   region: "ap-northeast-1",
 //   // DynamoDBLocal自体はlocalhostで動くが、SAM Localと一緒に使うなら
 //   // ループバックのエイリアスが必要
 //   endpoint: "http://192.16.123.1:8000"
 // });
-var db = new AWS.DynamoDB();
+
+var db = new aws.DynamoDB();
 
 exports.handler = (event, context, callback)=> {
+
+  // let mock ={content:"This is it"};
+  // callback(null, {statusCode: 200, body:JSON.stringify(mock)});
+  // return;
 
   // DynamoDBのAPIに渡す共通のパラメータ
   var params = {
@@ -35,15 +40,26 @@ exports.handler = (event, context, callback)=> {
           params.Key = {"id":{"S":event.pathParameters.item}};
           db.getItem(params, function(err,data){
             if(err){
-
               console.log(err);
               callback(null, {statusCode: 500, body: err});
-
             }
             else{ 
               console.log(data);
-              callback(null, {statusCode: 200, body: data});
-
+              responsebody = {
+                // すべてstring型とわかっているなら、キー名でループして1行で書けない？
+                id: data.Item.id.S,
+                category: data.Item.category.S,
+                name: data.Item.name.S,
+                location: data.Item.location.S,
+                place: data.Item.place.S,
+                getdate: data.Item.getdate.S,
+                owner: data.Item.owner.S,
+                borrower: data.Item.borrower.S,
+                borrowdate: data.Item.borrowdate.S,
+                returndate: data.Item.returndate.S
+              }
+              console.log(JSON.stringify(responseBody));
+              callback(null, {statusCode: 200, body: JSON.stringify(responseBody)});
             }
           });
         };
@@ -56,15 +72,31 @@ exports.handler = (event, context, callback)=> {
         operation = function(){
           db.scan(params, function(err,data){
             if(err){
-
               console.log(err);
-              callback(null, err);
+              callback(null, {statusCode: 500, body: err});
             }
             else{ 
-
+              responseBody = []
               console.log(data);
-              callback(null, {statusCode: 200, body: responseBody});
-
+              data.Items.forEach(function(item){
+                console.log(item);
+                let element = {
+                  // すべてstring型とわかっているなら、キー名でループして1行で書けない？
+                  // idつきで一個取ってきた場合と微妙に違うのが気持ち悪い
+                  id: item.id.S,
+                  category: item.category.S,
+                  name: item.name.S,
+                  location: item.location.S,
+                  place: item.place.S,
+                  getdate: item.getdate.S,
+                  owner: item.owner.S,
+                  borrower: item.borrower.S,
+                  borrowdate: item.borrowdate.S,
+                  returndate: item.returndate.S
+                };
+                responseBody.push(element);
+              });
+              callback(null, {statusCode: 200, body: JSON.stringify(responseBody)});
             }
           });
         };
