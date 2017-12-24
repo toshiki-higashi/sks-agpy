@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AGPY project
+Resources:
+  Items:
+    Properties:
+      CodeUri: s3://hirase-sam/4e6ef0a541b8dfc115f829849e3427da
+      Events:
+        CreateItem:
+          Properties:
+            Method: post
+            Path: /items
+          Type: Api
+        DeleteItem:
+          Properties:
+            Method: delete
+            Path: /items/{item}
+          Type: Api
+        GetItem:
+          Properties:
+            Method: get
+            Path: /items/{item}
+          Type: Api
+        Invalid:
+          Properties:
+            Method: any
+            Path: /items/{item}
+          Type: Api
+        ListItems:
+          Properties:
+            Method: get
+            Path: /items
+          Type: Api
+        UpdateItem:
+          Properties:
+            Method: put
+            Path: /items/{item}
+          Type: Api
+      Handler: index.handler
+      Runtime: nodejs6.10
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

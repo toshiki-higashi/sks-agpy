@@ -37,10 +37,11 @@ exports.handler = (event, context, callback)=> {
             if(err){
 
               console.log(err);
+              callback(null, {statusCode: 500, body: 'Internal server error on db.get'});
 
             }
-            else{ console.log(data);
-
+            else{ 
+              console.log(data);
               callback(null, {statusCode: 200, body: "get id"});
 
             }
@@ -57,7 +58,7 @@ exports.handler = (event, context, callback)=> {
             if(err){
 
               console.log(err);
-
+              callback(null, {statusCode: 500, body: 'Internal server error on db.scan'});
             }
             else{ 
 
@@ -78,7 +79,8 @@ exports.handler = (event, context, callback)=> {
       operation = function(){
         params.Item = {
           "id":{"S":uuid.v4()},
-          "name":{"S":"foo"}};
+          "name":{"S":"foo"}
+        };
         db.putItem(params,function(err,data){
             if(err){
 
