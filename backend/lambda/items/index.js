@@ -14,10 +14,6 @@ var db = new aws.DynamoDB();
 
 exports.handler = (event, context, callback)=> {
 
-  // let mock ={content:"This is it"};
-  // callback(null, {statusCode: 200, body:JSON.stringify(mock)});
-  // return;
-
   // DynamoDBのAPIに渡す共通のパラメータ
   var params = {
     TableName: "agpy-items"
@@ -42,22 +38,20 @@ exports.handler = (event, context, callback)=> {
             if(err){
               console.log(err);
               callback(null, {statusCode: 500, body: err});
-            }
-            else{ 
-              console.log(data);
-              responsebody = {
-                // すべてstring型とわかっているなら、キー名でループして1行で書けない？
+            }else{ 
+              // すべてstring型とわかっているなら、キー名でループして1行で書けない？
+              responseBody = {
                 id: data.Item.id.S,
                 category: data.Item.category.S,
                 name: data.Item.name.S,
                 location: data.Item.location.S,
                 place: data.Item.place.S,
-                getdate: data.Item.getdate.S,
+                getDate: data.Item.getDate.S,
                 owner: data.Item.owner.S,
                 borrower: data.Item.borrower.S,
-                borrowdate: data.Item.borrowdate.S,
-                returndate: data.Item.returndate.S
-              }
+                borrowDate: data.Item.borrowDate.S,
+                returnDate: data.Item.returnDate.S
+              };
               console.log(JSON.stringify(responseBody));
               callback(null, {statusCode: 200, body: JSON.stringify(responseBody)});
             }
@@ -80,19 +74,19 @@ exports.handler = (event, context, callback)=> {
               console.log(data);
               data.Items.forEach(function(item){
                 console.log(item);
+                // すべてstring型とわかっているなら、キー名でループして1行で書けない？
+                // idつきで一個取ってきた場合と微妙に違うのが気持ち悪い
                 let element = {
-                  // すべてstring型とわかっているなら、キー名でループして1行で書けない？
-                  // idつきで一個取ってきた場合と微妙に違うのが気持ち悪い
                   id: item.id.S,
                   category: item.category.S,
                   name: item.name.S,
                   location: item.location.S,
                   place: item.place.S,
-                  getdate: item.getdate.S,
+                  getDate: item.getDate.S,
                   owner: item.owner.S,
                   borrower: item.borrower.S,
-                  borrowdate: item.borrowdate.S,
-                  returndate: item.returndate.S
+                  borrowDate: item.borrowDate.S,
+                  returnDate: item.returnDate.S
                 };
                 responseBody.push(element);
               });
@@ -114,17 +108,17 @@ exports.handler = (event, context, callback)=> {
           "name":{"S":"foo"}
         };
         db.putItem(params,function(err,data){
-            if(err){
+          if(err){
 
-              console.log(err);
+            console.log(err);
 
-            }
-            else{ 
+          }
+          else{ 
 
-              console.log(data);
-              callback(null, {statusCode: 200, body: responseBody});
+            console.log(data);
+            callback(null, {statusCode: 200, body: responseBody});
 
-            }
+          }
         });
       };
       break;  
