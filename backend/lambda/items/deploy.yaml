@@ -3,7 +3,7 @@ Description: AGPY project
 Resources:
   Items:
     Properties:
-      CodeUri: s3://sks-agpy-lambda/d557e5b3c18a5e3febdb08a23013c9fb
+      CodeUri: s3://sks-agpy-lambda/f458f9c9cb92002b3aa3bee6d16d56c0
       Events:
         CreateItem:
           Properties:
