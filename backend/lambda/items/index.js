@@ -72,7 +72,7 @@ exports.handler = (event, context, callback)=> {
               callback(null, {statusCode: 500, body: err});
             }
             else{ 
-              responseBody = []
+              responseBody = {items: []};
               console.log(data);
               data.Items.forEach(function(item){
                 console.log(item);
@@ -89,7 +89,7 @@ exports.handler = (event, context, callback)=> {
                   borrowDate: item.borrowDate.S,
                   returnDate: item.returnDate.S
                 };
-                responseBody.push(element);
+                responseBody.items.push(element);
               });
               callback(null, {statusCode: 200, body: JSON.stringify(responseBody)});
             }
