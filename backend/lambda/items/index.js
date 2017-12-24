@@ -2,13 +2,13 @@
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
 
-AWS.config.update({
-  // ここで指定するリージョンはDynamoDBLocalとあっている必要あり？(未検証)
-  region: "ap-northeast-1",
-  // DynamoDBLocal自体はlocalhostで動くが、SAM Localと一緒に使うなら
-  // ループバックのエイリアスが必要
-  endpoint: "http://192.16.123.1:8000"
-});
+// AWS.config.update({
+//   // ここで指定するリージョンはDynamoDBLocalとあっている必要あり？(未検証)
+//   region: "ap-northeast-1",
+//   // DynamoDBLocal自体はlocalhostで動くが、SAM Localと一緒に使うなら
+//   // ループバックのエイリアスが必要
+//   endpoint: "http://192.16.123.1:8000"
+// });
 var db = new AWS.DynamoDB();
 
 exports.handler = (event, context, callback)=> {
@@ -37,12 +37,12 @@ exports.handler = (event, context, callback)=> {
             if(err){
 
               console.log(err);
-              callback(null, {statusCode: 500, body: 'Internal server error on db.get'});
+              callback(null, {statusCode: 500, body: err});
 
             }
             else{ 
               console.log(data);
-              callback(null, {statusCode: 200, body: "get id"});
+              callback(null, {statusCode: 200, body: data});
 
             }
           });
@@ -58,7 +58,7 @@ exports.handler = (event, context, callback)=> {
             if(err){
 
               console.log(err);
-              callback(null, {statusCode: 500, body: 'Internal server error on db.scan'});
+              callback(null, err);
             }
             else{ 
 

@@ -3,7 +3,7 @@ Description: AGPY project
 Resources:
   Items:
     Properties:
-      CodeUri: s3://hirase-sam/4e6ef0a541b8dfc115f829849e3427da
+      CodeUri: s3://sks-agpy-lambda/9ff5e99adbfdef5216d0108af43ddf47
       Events:
         CreateItem:
           Properties:
@@ -36,6 +36,7 @@ Resources:
             Path: /items/{item}
           Type: Api
       Handler: index.handler
+      Role: arn:aws:iam::760316288087:role/agpy-lambda-role
       Runtime: nodejs6.10
     Type: AWS::Serverless::Function
 Transform: AWS::Serverless-2016-10-31

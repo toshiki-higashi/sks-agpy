@@ -8,6 +8,7 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs6.10
+      Role: arn:aws:iam::760316288087:role/agpy-lambda-role
       Events:
         ListItems:
           Type: Api
