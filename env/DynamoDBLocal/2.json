@@ -1,0 +1,12 @@
+{
+  "id": {"S":"100288"},
+  "category": {"S":"本"},
+  "name": {"S":"Web API: The Good Parts  水野 貴明"},
+  "location": {"S":"本社"},
+  "place":{"S":"8F本棚C-8"},
+  "getDate": {"S":"2017/11/10"},
+  "owner": {"S":"C氏"},
+  "borrower": {"S":"D氏"},
+  "borrowDate": {"S":"2017/11/08"},
+  "returnDate": {"S":"2017/11/15"}
+}
