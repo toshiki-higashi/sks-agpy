@@ -19,8 +19,16 @@ exports.handler = (event, context, callback)=> {
     TableName: "agpy-items"
   };
 
+  // CORS設定用
+  corsHeader={"Access-Control-Allow-Origin" : "*"};
+
   // これらの変数にHTTPメソッドに応じた値・処理を代入する
-  var responseBody = null;
+  var response = {
+    statusCode:null,
+    body:null,
+    headers: corsHeader
+  };
+
   var validator = null;
   var operation = null;
 
@@ -37,14 +45,16 @@ exports.handler = (event, context, callback)=> {
           db.getItem(params, function(err,data){
             if(err){
               console.log(err);
-              callback(null, {statusCode: 500, body: err});
+              response.statusCode=500;
+              response.body=JSON.stringify(err);
+              callback(null, response);
             }else{ 
               // TODO すべてstring型とわかっているなら、キー名でループして1行で書けない？
               // TODO 所有者/借りている人はDB上でどう持つ
               // user.id持つならagpy-usersを見に行かないといけない
               // borrowerなどundefinedなことがあり得る属性をそのまま取ろうとすると無い時に失敗する
               // set Allow origin...in the header of response! Do not try to do it on management console
-              esponseBody = {
+              item = {
                 id: data.Item.id.S,
                 category: data.Item.category.S,
                 name: data.Item.name.S,
@@ -56,8 +66,9 @@ exports.handler = (event, context, callback)=> {
                 borrowDate: data.Item.borrowDate.S,
                 returnDate: data.Item.returnDate.S
               };
-              console.log(JSON.stringify(responseBody));
-              callback(null, {statusCode: 200, body: JSON.stringify(responseBody)});
+              response.statusCode=200;
+              response.body=JSON.stringify(item);
+              callback(null, response);
             }
           });
         };
@@ -71,15 +82,16 @@ exports.handler = (event, context, callback)=> {
           db.scan(params, function(err,data){
             if(err){
               console.log(err);
-              callback(null, {statusCode: 500, body: err});
+              response.statusCode=500;
+              response.body=JSON.stringify(err);
+              callback(null, response);
             }
             else{ 
-              responseBody = {items: []};
+              var parsedItemList = {items: []};
               console.log(data);
               data.Items.forEach(function(item){
                 console.log(item);
-                // TODO idつきで一個取ってきた場合と微妙に違うのが気持ち悪い
-                let element = {
+                parsedItemList.items.push({
                   id: item.id.S,
                   category: item.category.S,
                   name: item.name.S,
@@ -90,10 +102,11 @@ exports.handler = (event, context, callback)=> {
                   borrower: item.borrower.S,
                   borrowDate: item.borrowDate.S,
                   returnDate: item.returnDate.S
-                };
-                responseBody.items.push(element);
+                });
               });
-              callback(null, {statusCode: 200, body: JSON.stringify(responseBody)});
+              response.statusCode=200;
+              response.body=JSON.stringify(parsedItemList);
+              callback(null, response);
             }
           });
         };
@@ -119,7 +132,7 @@ exports.handler = (event, context, callback)=> {
           else{ 
 
             console.log(data);
-            callback(null, {statusCode: 200, body: responseBody});
+            callback(null, {statusCode: 200, body: parsedItemList});
 
           }
         });
