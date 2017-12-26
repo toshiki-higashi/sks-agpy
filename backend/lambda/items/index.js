@@ -42,7 +42,9 @@ exports.handler = (event, context, callback)=> {
               // TODO すべてstring型とわかっているなら、キー名でループして1行で書けない？
               // TODO 所有者/借りている人はDB上でどう持つ
               // user.id持つならagpy-usersを見に行かないといけない
-              responseBody = {
+              // borrowerなどundefinedなことがあり得る属性をそのまま取ろうとすると無い時に失敗する
+              // set Allow origin...in the header of response! Do not try to do it on management console
+              esponseBody = {
                 id: data.Item.id.S,
                 category: data.Item.category.S,
                 name: data.Item.name.S,
