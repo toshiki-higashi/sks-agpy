@@ -1,0 +1,12 @@
+{
+  "id": {"S":"200288"},
+  "category": {"S":"PC"},
+  "name": {"S":"raspberry pi 3"},
+  "location": {"S":"本社"},
+  "place":{"S":"第1倉庫室"},
+  "getDate": {"S":"2017/11/10"},
+  "owner": {"S":"第1チーム"},
+  "borrower": {"S":"E氏"},
+  "borrowDate": {"S":"2017/11/13"},
+  "returnDate": {"S":"2017/11/17"}
+}

@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AGPY project
+Resources:
+  Items:
+    Properties:
+      CodeUri: s3://sks-agpy-lambda/e3c73c93f84ef35a4befdeb6059e6493
+      Events:
+        CreateItem:
+          Properties:
+            Method: post
+            Path: /items
+          Type: Api
+        DeleteItem:
+          Properties:
+            Method: delete
+            Path: /items/{item}
+          Type: Api
+        GetItem:
+          Properties:
+            Method: get
+            Path: /items/{item}
+          Type: Api
+        Invalid:
+          Properties:
+            Method: any
+            Path: /items/{item}
+          Type: Api
+        ListItems:
+          Properties:
+            Method: get
+            Path: /items
+          Type: Api
+        UpdateItem:
+          Properties:
+            Method: put
+            Path: /items/{item}
+          Type: Api
+      Handler: index.handler
+      Role: arn:aws:iam::760316288087:role/agpy-lambda-role
+      Runtime: nodejs6.10
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
