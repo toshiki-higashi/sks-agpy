@@ -2,7 +2,7 @@
 div
   h4 資産詳細
   //- item-detail-tableのlistsに対して、getSelectedItemDetail(id)の結果を投げている
-  item-detail-table(:columns="columns",:lists="getSelectedItemDetail(id)")
+  item-detail-table(:itemListsColumns="itemListsColumns",:selectedItemDetail="getSelectedItemDetail(id)")
   router-link(to="/item/update" tag="button").btn.btn-outline-primary.btn-sm 資産更新
   router-link(to="/item/delete" tag="button").btn.btn-outline-danger.btn-sm 資産削除
 </template>
@@ -15,17 +15,17 @@ export default {
   // 親コンポーネントから受け取るデータを、自分たちでも定義しておく必要がある
   props: {
     id: String,
-    columns: Array,
-    lists: Array
+    itemListsColumns: Array,
+    itemLists: Array
   },
   // 子コンポーネント呼び出し手順②
   components: {
     ItemDetailTable
   },
   methods: {
-    // 受け取ったidと一致したidを持つlists内のデータを返す
+    // 受け取ったidと一致したidを持つitemLists内のデータを返す
     getSelectedItemDetail: function (id) {
-      const matchedData = this.lists.filter(function(item) {
+      const matchedData = this.itemLists.filter(function(item) {
         if (item.id == id) return true;
       });
       return matchedData[0];
