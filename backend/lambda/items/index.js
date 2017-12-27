@@ -87,11 +87,11 @@ exports.handler = (event, context, callback)=> {
               callback(null, response);
             }
             else{ 
-              var parsedItemList = {items: []};
+              var parsedItemList = [];
               console.log(data);
               data.Items.forEach(function(item){
                 console.log(item);
-                parsedItemList.items.push({
+                parsedItemList.push({
                   id: item.id.S,
                   category: item.category.S,
                   name: item.name.S,
