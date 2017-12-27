@@ -17,13 +17,6 @@ export default {
   props: {
     itemListsColumns: Array,
     itemLists: Array
-  },
-  // vueによる描画が全て終わった後で実行される。
-  // ここではdatatableプラグインをtableに適用している
-  mounted: function () {
-    this.$nextTick(function () {
-        $('#example').DataTable();
-    })
   }
 }
 </script>
