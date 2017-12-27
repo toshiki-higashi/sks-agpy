@@ -20,7 +20,7 @@ exports.handler = (event, context, callback)=> {
   };
 
   // CORS設定用
-  corsHeader={"Access-Control-Allow-Origin" : "*"};
+  var corsHeader={"Access-Control-Allow-Origin" : "*"};
 
   // これらの変数にHTTPメソッドに応じた値・処理を代入する
   var response = {
@@ -54,7 +54,7 @@ exports.handler = (event, context, callback)=> {
               // user.id持つならagpy-usersを見に行かないといけない
               // borrowerなどundefinedなことがあり得る属性をそのまま取ろうとすると無い時に失敗する
               // set Allow origin...in the header of response! Do not try to do it on management console
-              item = {
+              var item = {
                 id: data.Item.id.S,
                 category: data.Item.category.S,
                 name: data.Item.name.S,
@@ -132,7 +132,7 @@ exports.handler = (event, context, callback)=> {
           else{ 
 
             console.log(data);
-            callback(null, {statusCode: 200, body: parsedItemList});
+            callback(null, {statusCode: 200, body: "POST"});
 
           }
         });
