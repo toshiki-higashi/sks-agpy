@@ -58,8 +58,10 @@ export default {
   // beforeMountが良いかは検討の余地あり
   // 詳細はVue.js公式ドキュメントのライフサイクルフックを参照
   beforeMount: function () {
-    let url = "http://localhost:3000/itemLists";
+    // let url = "http://localhost:3000/itemLists";
+    let url = "https://1b6f9yise0.execute-api.ap-northeast-1.amazonaws.com/Prod/items";
     axios.get(url).then((response) => {
+      console.log(response.data);
       this.itemLists = response.data;
     }).catch( error => {
       console.log(error);
