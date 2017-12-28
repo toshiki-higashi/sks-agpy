@@ -17,6 +17,7 @@ import DeleteItem from './components/DeleteItem.vue';
 const routes = [
   {
     path: '/',
+    redirect: '/item',
     component: App,
     props: true,
     children: [

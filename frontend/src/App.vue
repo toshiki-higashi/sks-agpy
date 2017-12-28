@@ -21,6 +21,8 @@ div#wrapper.container-fluid
 
 <script>
 import axios from 'axios';
+import $ from 'jquery';
+import dt from 'datatables.net';
 // 子コンポーネント呼び出し手順1
 import Header from './components/header.vue';
 import Menu from './components/menu.vue';
@@ -58,12 +60,19 @@ export default {
   // beforeMountが良いかは検討の余地あり
   // 詳細はVue.js公式ドキュメントのライフサイクルフックを参照
   beforeMount: function () {
-    let url = "http://localhost:3000/itemLists";
+    // let url = "http://localhost:3000/itemLists";
+    let url = "https://1b6f9yise0.execute-api.ap-northeast-1.amazonaws.com/Prod/items";
     axios.get(url).then((response) => {
+      // console.log(response.data);
       this.itemLists = response.data;
     }).catch( error => {
       console.log(error);
     });
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+        $('#datatables').DataTable();
+    })
   }
 }
 </script>
