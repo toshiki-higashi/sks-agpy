@@ -15,27 +15,27 @@ import DeleteItem from './components/DeleteItem.vue';
 
 // vue-routerによるルーティングの情報を定義
 const routes = [
-  {
-    path: '/',
-    redirect: '/item',
-    component: App,
-    props: true,
-    children: [
-      { path: 'item', components: { ShowItems } },
-      { path: 'item/details/:id', components: { ShowItemDetails }, props: true },
-      { path: 'item/add', components: { AddItem } },
-      { path: 'item/update', components: { UpdateItem } },
-      { path: 'item/delete', components: { DeleteItem } }
-    ]
-  }
+    {
+        path: '/',
+        redirect: '/item',
+        component: App,
+        props: true,
+        children: [
+            { path: 'item', components: { ShowItems } },
+            { path: 'item/details/:id', components: { ShowItemDetails }, props: true },
+            { path: 'item/add', components: { AddItem } },
+            { path: 'item/update', components: { UpdateItem } },
+            { path: 'item/delete', components: { DeleteItem } }
+        ]
+    }
 ];
 
 // VueRouterインスタンスを作成して定義したroutesを渡す
 const router = new VueRouter({
-  routes // `routes: routes` の短縮表記
+    routes // `routes: routes` の短縮表記
 });
 
 // Vueインスタンスを作成してrouterをインジェクト？する
 new Vue({
-  router // `router: router` の短縮表記
-}).$mount('#app')
+    router // `router: router` の短縮表記
+}).$mount('#app');
